@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/feed_thumbnail"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/feed_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/feed_thumbnail"
+        android:layout_toEndOf="@id/feed_thumbnail"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="@string/placeholder_title"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/author_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:text="@string/author_label"
+        android:layout_toRightOf="@id/feed_thumbnail"
+        android:layout_toEndOf="@id/feed_thumbnail"
+        android:layout_below="@id/feed_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/author_name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/author_label"
+        android:layout_toEndOf="@id/author_label"
+        android:layout_below="@id/feed_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/placeholder_author_name"
+        android:textSize="18sp"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/ups_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ups_label"
+        android:layout_toRightOf="@id/feed_thumbnail"
+        android:layout_toEndOf="@id/feed_thumbnail"
+        android:layout_below="@id/author_label"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:textSize="18sp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/ups_count"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ups_label"
+        android:layout_toEndOf="@id/ups_label"
+        android:layout_below="@id/author_label"
+        android:textSize="18sp"
+        android:text="@string/placeholder_ups_count"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:id="@+id/comments_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/author_label"
+        android:layout_toEndOf="@id/author_label"
+        android:layout_below="@id/author_name"
+        android:textSize="18sp"
+        android:text="@string/comments_label"
+        android:layout_marginTop="5dp"
+        android:textStyle="italic"/>
+
+    <TextView
+        android:id="@+id/comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/comments_label"
+        android:layout_toEndOf="@id/comments_label"
+        android:layout_below="@id/author_name"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:textSize="18sp"
+        android:text="@string/comments_label"
+        android:layout_marginTop="5dp"
+        android:textStyle="italic"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+</RelativeLayout>

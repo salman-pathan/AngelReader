@@ -43,6 +43,7 @@ public class StartScreenFragment extends Fragment {
         if (MiscHelper.isOnline(getActivity())) {
             listener.success();
         } else {
+            //TODO: Add fancy alert dialog and make it modular.
             new AlertDialog.Builder(getActivity())
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle(R.string.internet_not_available_title)
