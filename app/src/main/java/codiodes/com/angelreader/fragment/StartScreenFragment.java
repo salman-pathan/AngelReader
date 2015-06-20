@@ -2,13 +2,16 @@ package codiodes.com.angelreader.fragment;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import codiodes.com.angelreader.R;
 import codiodes.com.angelreader.helper.MiscHelper;
 
@@ -17,18 +20,45 @@ import codiodes.com.angelreader.helper.MiscHelper;
  */
 public class StartScreenFragment extends Fragment {
 
+    public static final int DELAY = 3000;
     SuccessStartListener listener;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (MiscHelper.isOnline(getActivity())) {
+            simulateLoading();
+        } else {
+            String errorTitle = getActivity().getResources().getString(R.string.internet_not_available_title);
+            SweetAlertDialog sweetAlertDialog = MiscHelper.getNoInternetAccessErrorDialog(getActivity(), errorTitle);
+            sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                @Override
+                public void onClick(SweetAlertDialog sweetAlertDialog) {
+                    getActivity().finish();
+                }
+            });
+            sweetAlertDialog.show();
+        }
+    }
 
     public StartScreenFragment() {
         // Required empty public constructor
     }
 
+    private void simulateLoading() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                listener.success();
+            }
+        }, DELAY);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_start_screen, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_start_screen, container, false);
     }
 
     @Override
@@ -37,22 +67,7 @@ public class StartScreenFragment extends Fragment {
         listener = (SuccessStartListener) activity;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (MiscHelper.isOnline(getActivity())) {
-            listener.success();
-        } else {
-            //TODO: Add fancy alert dialog and make it modular.
-            new AlertDialog.Builder(getActivity())
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(R.string.internet_not_available_title)
-                    .setMessage(R.string.internet_not_available_message)
-                    .show();
-        }
-    }
-
     public interface SuccessStartListener {
-        public void success();
+        void success();
     }
 }

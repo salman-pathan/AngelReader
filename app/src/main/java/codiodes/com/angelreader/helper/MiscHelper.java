@@ -6,8 +6,6 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import java.util.Calendar;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import codiodes.com.angelreader.R;
 
@@ -24,8 +22,17 @@ public class MiscHelper {
 
     public static SweetAlertDialog getProgressDialog(Activity activity, String title) {
         SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE);
+        sweetAlertDialog.setTitleText(title);
         sweetAlertDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         sweetAlertDialog.setCancelable(false);
         return  sweetAlertDialog;
+    }
+
+    public static SweetAlertDialog getNoInternetAccessErrorDialog(final Activity activity, String title) {
+        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(activity, SweetAlertDialog.ERROR_TYPE);
+        sweetAlertDialog.setTitleText(title);
+        sweetAlertDialog.setCancelable(false);
+        sweetAlertDialog.setConfirmText(activity.getString(R.string.dialog_ok));
+        return sweetAlertDialog;
     }
 }
