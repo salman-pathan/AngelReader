@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dark_green" type="color">#468966</item>
+    <item name="dark_yellow" type="color">#FFB03B</item>
+    <item name="light_yellow" type="color">#FFF0A5</item>
+    <item name="dark_red" type="color">#8E2800</item>
+    <item name="light_red" type="color">#B64926</item>
+    <item name="light_grey" type="color">#B3B3B3</item>
+    <item name="white" type="color">#EEEEEE</item>
+</resources>

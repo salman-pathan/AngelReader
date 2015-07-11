@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/menu_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@color/dark_red"/>
+
+    <TextView
+        android:id="@+id/menu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_menu_name"
+        android:layout_toEndOf="@id/menu_icon"
+        android:layout_toRightOf="@id/menu_icon"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_green"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/menu_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_menu_name"
+        android:layout_toEndOf="@id/menu_icon"
+        android:layout_toRightOf="@id/menu_icon"
+        android:layout_below="@id/menu_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="@color/light_grey"/>
+
+</RelativeLayout>

@@ -7,7 +7,15 @@
     <string name="internet_not_available_title">No Internet Access</string>
     <string name="internet_not_available_message">No Internet Access, please check your settings.</string>
     <string name="positive_button_message">OK</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder_title">A long placeholder title that will cover the title area for testing purpose.</string>
+    <string name="author_label">Submitted by</string>
+    <string name="placeholder_author_name">Placeholder author name.</string>
+    <string name="ups_label">Ups</string>
+    <string name="placeholder_ups_count">1432211</string>
+    <string name="comments_label">Comments</string>
+    <string name="no_result_found">No new results found</string>
+    <string name="loading">Loading</string>
+    <string name="placeholder_menu_name">Placeholder Menu Name</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
 </resources>
