@@ -3,8 +3,11 @@ package codiodes.com.angelreader.helper;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import codiodes.com.angelreader.R;
@@ -13,6 +16,14 @@ import codiodes.com.angelreader.R;
  * Created by root on 15/6/15.
  */
 public class MiscHelper {
+
+    public static void stylizeActionBar(AppCompatActivity activity) {
+        ActionBar bar = activity.getSupportActionBar();
+        bar.setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(R.color.dark_green)));
+        bar.setElevation(0);
+        bar.setDisplayShowHomeEnabled(true);
+        bar.setIcon(R.mipmap.ic_launcher);
+    }
 
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
