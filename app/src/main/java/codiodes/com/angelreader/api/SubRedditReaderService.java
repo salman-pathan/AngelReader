@@ -1,4 +1,4 @@
-package codiodes.com.angelreader.service;
+package codiodes.com.angelreader.api;
 
 import codiodes.com.angelreader.entity.Feed;
 import retrofit.Callback;

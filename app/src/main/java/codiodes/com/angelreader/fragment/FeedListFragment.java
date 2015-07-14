@@ -23,7 +23,7 @@ import codiodes.com.angelreader.adapter.FeedListAdapter;
 import codiodes.com.angelreader.entity.Children;
 import codiodes.com.angelreader.entity.Feed;
 import codiodes.com.angelreader.helper.MiscHelper;
-import codiodes.com.angelreader.service.SubRedditReaderService;
+import codiodes.com.angelreader.api.SubRedditReaderService;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

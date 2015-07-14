@@ -1,14 +1,19 @@
 package codiodes.com.angelreader.activity;
 
 import android.app.SearchManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,12 +27,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import codiodes.com.angelreader.R;
 import codiodes.com.angelreader.adapter.DrawerListAdapter;
+import codiodes.com.angelreader.constant.ServiceConstant;
 import codiodes.com.angelreader.entity.NavigationItem;
 import codiodes.com.angelreader.fragment.FeedListFragment;
 import codiodes.com.angelreader.fragment.StartScreenFragment;
 import codiodes.com.angelreader.helper.FragmentHelper;
 import codiodes.com.angelreader.helper.MiscHelper;
-
+import codiodes.com.angelreader.service.InternetService;
 
 public class MainActivity extends AppCompatActivity implements StartScreenFragment.SuccessStartListener {
 
@@ -42,12 +48,26 @@ public class MainActivity extends AppCompatActivity implements StartScreenFragme
 
     ActionBarDrawerToggle drawerToggle;
     ArrayList<NavigationItem> navigationItems;
+    BroadcastReceiver broadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+
+        //  Start background intent service
+        Intent internetServiceIntent = new Intent(this, InternetService.class);
+        startService(internetServiceIntent);
+
+        //  Recieve intent from background serivce
+        IntentFilter intentFilter = new IntentFilter(ServiceConstant.BROADCAST_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.i("BROADCAST", intent.toString());
+            }
+        }, intentFilter);
 
         //  Stylize the action bar
         MiscHelper.stylizeActionBar(this);
@@ -61,6 +81,12 @@ public class MainActivity extends AppCompatActivity implements StartScreenFragme
         //  Add Start Screen Fragment
         FragmentHelper.addFragment(R.id.container, new StartScreenFragment(), this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
 
     private void setMenusForHamburgerMenu() {
         try {
@@ -135,10 +161,18 @@ public class MainActivity extends AppCompatActivity implements StartScreenFragme
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        } else {
-            return false;
+        final int itemId = item.getItemId();
+
+        //  Toggles hamburger menu.
+        drawerToggle.onOptionsItemSelected(item);
+
+        switch (itemId) {
+            case R.id.action_refresh:
+                return true;
+            case R.id.action_search:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
