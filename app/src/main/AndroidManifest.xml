@@ -40,7 +40,8 @@
 
         <service
             android:name=".service.InternetService"
-            android:exported="false" >
+            android:exported="false"
+            android:permission="InternetService">
         </service>
     </application>
 

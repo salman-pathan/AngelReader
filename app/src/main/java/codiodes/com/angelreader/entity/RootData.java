@@ -3,6 +3,8 @@ package codiodes.com.angelreader.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class RootData implements Parcelable {
     String modhash;
     List<Children> children;
     String after;
+    @SerializedName("before")
     String before;
 
     public RootData(String modhash, List<Children> children, String after, String before) {
@@ -35,9 +38,15 @@ public class RootData implements Parcelable {
         return after;
     }
 
+    public void setAfter(String after) {
+        this.after = after;
+    }
+
     public String getBefore() {
         return before;
     }
+
+    public void setBefore(String before) { this.before = before; }
 
     protected RootData(Parcel in) {
         modhash = in.readString();

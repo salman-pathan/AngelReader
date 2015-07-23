@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import codiodes.com.angelreader.R;
 
@@ -37,6 +39,25 @@ public class MiscHelper {
         sweetAlertDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
         sweetAlertDialog.setCancelable(false);
         return  sweetAlertDialog;
+    }
+
+    public static MaterialDialog getWarningDialog(Context context, int title, int subtitle) {
+        MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .title(title)
+                .content(subtitle)
+                .cancelable(true)
+                .build();
+        return dialog;
+    }
+
+    public static MaterialDialog getNetworkErrorDialog(Context context) {
+        MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .title(R.string.internet_not_available_title)
+                .content(R.string.internet_not_available_message)
+                .autoDismiss(false)
+                .cancelable(false)
+                .build();
+        return dialog;
     }
 
     public static SweetAlertDialog getNoInternetAccessErrorDialog(final Activity activity, String title) {

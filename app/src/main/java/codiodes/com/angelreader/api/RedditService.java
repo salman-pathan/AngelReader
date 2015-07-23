@@ -15,5 +15,8 @@ public interface RedditService {
     void getFeeds(@Path("subreddit") String subReddit, Callback<Feed> feedCallback);
 
     @GET("/r/{subreddit}/.json")
-    void getSubRedditFeed(@Path("subreddit") String subReddit, @Query("limit") int limit, @Query("after") String after, Callback<Feed> feedCallback);
+    void getSubRedditNextFeed(@Path("subreddit") String subReddit, @Query("limit") int limit, @Query("after") String after, @Query("count") int count, Callback<Feed> feedCallback);
+
+    @GET("/r/{subreddit}/.json")
+    void getSubRedditPreviousFeed(@Path("subreddit") String subReddit, @Query("limit") int limit, @Query("before") String before, @Query("count") int count, Callback<Feed> feedCallback);
 }

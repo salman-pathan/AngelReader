@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Iterator;
 import java.util.List;
 
 import codiodes.com.angelreader.R;
@@ -32,8 +33,9 @@ public class FeedListAdapter extends BaseAdapter{
         this.childrens = feed.getData().getChildren();
     }
 
-    public void add(List<Children> childrens) {
-        this.childrens.addAll(childrens);
+    public void update(List<Children> childrens) {
+        FeedListAdapter.this.childrens = childrens;
+        notifyDataSetChanged();
     }
 
     @Override

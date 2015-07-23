@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,14 +20,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import codiodes.com.angelreader.R;
 import codiodes.com.angelreader.adapter.DrawerListAdapter;
+import codiodes.com.angelreader.constant.InternetAvailability;
 import codiodes.com.angelreader.constant.ServiceConstant;
 import codiodes.com.angelreader.entity.NavigationItem;
 import codiodes.com.angelreader.fragment.FeedListFragment;
@@ -34,11 +36,9 @@ import codiodes.com.angelreader.fragment.StartScreenFragment;
 import codiodes.com.angelreader.helper.FragmentHelper;
 import codiodes.com.angelreader.helper.MiscHelper;
 import codiodes.com.angelreader.service.InternetService;
+import codiodes.com.angelreader.service.InternetStatusHandler;
 
 public class MainActivity extends AppCompatActivity implements StartScreenFragment.SuccessStartListener {
-
-    @InjectView(R.id.hamburger_menu)
-    RelativeLayout hamburgerMenu;
 
     @InjectView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements StartScreenFragme
 
     ActionBarDrawerToggle drawerToggle;
     ArrayList<NavigationItem> navigationItems;
-    BroadcastReceiver broadcastReceiver;
+    SweetAlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +56,24 @@ public class MainActivity extends AppCompatActivity implements StartScreenFragme
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        //  Start background intent service
+        alertDialog = MiscHelper.getNoInternetAccessErrorDialog(MainActivity.this, "No Internet Access");
+
         Intent internetServiceIntent = new Intent(this, InternetService.class);
         startService(internetServiceIntent);
+        Log.e("POST HANDLE", "PING!");
 
         //  Recieve intent from background serivce
-        IntentFilter intentFilter = new IntentFilter(ServiceConstant.BROADCAST_ACTION);
-        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Log.i("BROADCAST", intent.toString());
-            }
-        }, intentFilter);
+//        IntentFilter intentFilter = new IntentFilter(ServiceConstant.BROADCAST_ACTION);
+//        LocalBroadcastManager.getInstance(this).registerReceiver(new BroadcastReceiver() {
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                InternetAvailability availability = (InternetAvailability) intent.getSerializableExtra(ServiceConstant.INTERNET_AVAILABILITY_STATUS);
+//                if (availability == InternetAvailability.NOT_AVAILABLE) {
+//                    Snackbar.make(findViewById(android.R.id.content), "Not Available", Snackbar.LENGTH_LONG).show();
+//                }
+//                Log.i("BROADCAST", availability.toString());
+//            }
+//        }, intentFilter);
 
         //  Stylize the action bar
         MiscHelper.stylizeActionBar(this);
@@ -87,6 +93,11 @@ public class MainActivity extends AppCompatActivity implements StartScreenFragme
         super.onResume();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        thread.interrupt();
+    }
 
     private void setMenusForHamburgerMenu() {
         try {

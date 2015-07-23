@@ -1,33 +1,33 @@
 package codiodes.com.angelreader.service;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
  * Created by Salman Khan on 14/7/15.
  */
-public class InternetStatusHandler {
+public class InternetStatusHandler implements Runnable{
 
-    NetworkStatusTask task = new NetworkStatusTask(new Handler());
-    Timer timer = new Timer();
+    Handler handler;
+    Context context;
 
-    class NetworkStatusTask extends TimerTask {
-        Handler handler;
+    public InternetStatusHandler(Context context) {
+        handler = new Handler();
+        this.context = context;
+    }
 
-        public NetworkStatusTask(Handler handler) {
-            this.handler = handler;
-        }
-
-        @Override
-        public void run() {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
-        }
+    @Override
+    public void run() {
+        handler.postDelayed(this, 5000);
+        //  Start background intent service
+        Intent internetServiceIntent = new Intent(context, InternetService.class);
+        context.startService(internetServiceIntent);
+        Log.e("POST HANDLE", "PING!");
     }
 }

@@ -20,25 +20,13 @@ import codiodes.com.angelreader.helper.MiscHelper;
  */
 public class StartScreenFragment extends Fragment {
 
-    public static final int DELAY = 3000;
+    public static final int DELAY = 4000;
     SuccessStartListener listener;
 
     @Override
     public void onResume() {
         super.onResume();
-        if (MiscHelper.isOnline(getActivity())) {
-            simulateLoading();
-        } else {
-            String errorTitle = getActivity().getResources().getString(R.string.internet_not_available_title);
-            SweetAlertDialog sweetAlertDialog = MiscHelper.getNoInternetAccessErrorDialog(getActivity(), errorTitle);
-            sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                @Override
-                public void onClick(SweetAlertDialog sweetAlertDialog) {
-                    getActivity().finish();
-                }
-            });
-            sweetAlertDialog.show();
-        }
+        simulateLoading();
     }
 
     public StartScreenFragment() {
